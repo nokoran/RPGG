@@ -68,10 +68,14 @@
     },
     "com.unity.2d.spriteshape": {
 <<<<<<< HEAD
+      "version": "5.1.6",
+=======
+<<<<<<< HEAD
       "version": "5.1.4",
 =======
       "version": "5.1.5",
 >>>>>>> f12c8b8e462647ab2c599b4d0f96346d419a3308
+>>>>>>> 358167f7d4d3bae344e2ff21eeef79650c976228
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -90,12 +94,16 @@
     },
     "com.unity.collab-proxy": {
 <<<<<<< HEAD
+      "version": "1.15.4",
+=======
+<<<<<<< HEAD
       "version": "1.9.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
 =======
       "version": "1.15.1",
+>>>>>>> 358167f7d4d3bae344e2ff21eeef79650c976228
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -122,7 +130,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.11",
+      "version": "2.0.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
