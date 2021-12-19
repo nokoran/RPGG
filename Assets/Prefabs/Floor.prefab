@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2048bfe9c352b784b876a23bd43aa73f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2acd437b3c0f41f4683d1fc02622381f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultsprite: {fileID: 21300000, guid: f7396dd95406eac4b8d3f0421b24688b, type: 3}
   tilesprite: {fileID: 21300000, guid: 614bad4d1152d82478f15d4670f781cb, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: f7396dd95406eac4b8d3f0421b24688b, type: 3}
+  TileMaterial: {fileID: 2100000, guid: 7096c64c5d31ebe459a3fb5b0af1b24d, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 2048bfe9c352b784b876a23bd43aa73f, type: 2}
   sr: {fileID: 2801453258366702700}
