@@ -7,15 +7,9 @@ public class RoomPlacer : MonoBehaviour
     public Room[] RoomPrefabs;
     public Room StartingRoom;
     private Room[,] SpawnedRooms;
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SpawnedRooms = new Room[11, 11];
+        SpawnedRooms[5, 5] = StartingRoom;
     }
 }
