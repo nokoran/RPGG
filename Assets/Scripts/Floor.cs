@@ -12,30 +12,21 @@ public class Floor : MonoBehaviour
     public SpriteRenderer sr;
     void Start()
     {
-        int rng =  Random.Range(0, 2);
+        int rng =  Random.Range(0, 3);
         if (rng == 1)
-        {
-            sr.sprite = tilesprite;
-            sr.material = TileMaterial;
-        }
-        else
         {
             sr.sprite = DefaultSprite;
             sr.material = defaultMaterial;
         }
-    }
-
-    private void Update()
-    {
-        int rng =  Random.Range(0, 2);
-        if (rng == 1)
+        else
         {
             sr.sprite = tilesprite;
             sr.material = TileMaterial;
+            
         }
-        else
+        int rng2 =  Random.Range(0, 2);
+        if (rng2 == 1 && sr.sprite == tilesprite)
         {
-            sr.sprite = DefaultSprite;
             sr.material = defaultMaterial;
         }
     }
