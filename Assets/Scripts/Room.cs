@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject DoorTop, DoorRight, DoorBottom, DoorLeft;
+    public Transform[] floor;
 
-    // Update is called once per frame
-    void Update()
+    public void RotateRandomly()
     {
-        
+        int Count = Random.Range(0, 4);
+        for(int i = 0; i < Count; i++)
+        {
+            transform.Rotate(0, 0, -90);
+            for (int e = 0; e < floor.Length; e++)
+            {
+                floor[e].Rotate(new Vector3Int(0, 0, 90));
+            }
+            GameObject tmp = DoorLeft;
+            DoorLeft = DoorBottom;
+            DoorBottom = DoorRight;
+            DoorRight = DoorTop;
+            DoorTop = tmp;
+        }
     }
 }

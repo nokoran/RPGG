@@ -24,19 +24,4 @@ public class Floor : MonoBehaviour
             sr.material = defaultMaterial;
         }
     }
-
-    private void Update()
-    {
-        int rng =  Random.Range(0, 2);
-        if (rng == 1)
-        {
-            sr.sprite = tilesprite;
-            sr.material = TileMaterial;
-        }
-        else
-        {
-            sr.sprite = DefaultSprite;
-            sr.material = defaultMaterial;
-        }
-    }
 }

@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         {
             fire = true;
             abilitytofire = false;
-            Invoke("FireDelay", 2);
+            Invoke("FireDelay", 1);
         }
 
     }
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        _rb.velocity = new Vector2(_userInputHorizontal*7, _userInputVertical*7);
+        _rb.velocity = new Vector2(_userInputHorizontal*2, _userInputVertical*2);
         _rb.rotation = angle;
         if (fire)
         {
