@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         {
             fire = true;
             abilitytofire = false;
-            Invoke("FireDelay", 1);
+            Invoke("FireDelay", 0.5f);
         }
 
     }
