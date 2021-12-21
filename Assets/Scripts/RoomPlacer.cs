@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomPlacer : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class RoomPlacer : MonoBehaviour
         SpawnedRooms = new Room[11, 11];
         SpawnedRooms[5, 5] = StartingRoom;
 
-        for (int i = 0; i<10; i++)
+        for (int i = 0; i<20; i++)
         {
             PlaceOneRoom(bossex);
             yield return new WaitForSecondsRealtime(0.01f);
@@ -59,13 +60,14 @@ public class RoomPlacer : MonoBehaviour
         }
         else
         {
-M2:
+            int limit = 500;
+        M2:
             int a = 0;
             Room newRoom = Instantiate(RoomPrefabs[a]);
-            int limit = 5000;
             while (limit-- > 0)
             {
-M1:
+                Debug.Log(limit);
+            M1:
                 Vector2Int position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
                 if ((position.x < 4 || position.x > 6) && (position.y < 4 || position.y > 6))
                 {
@@ -88,6 +90,7 @@ M1:
                     goto M2;
                 }
             }
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
             Destroy(newRoom.gameObject);
         }
     }
@@ -109,23 +112,35 @@ M1:
         }
         if (bossex)
         {
-            if (SpawnedRooms[p.x, p.y + 1] != null)
+            if (p.y != 10)
             {
-                count++;
+                if (SpawnedRooms[p.x, p.y + 1] != null)
+                {
+                    count++;
+                }
             }
-            if (SpawnedRooms[p.x, p.y - 1] != null)
+            if (p.y != 0)
             {
-                count++;
+                if (SpawnedRooms[p.x, p.y - 1] != null)
+                {
+                    count++;
+                }
             }
-            if (SpawnedRooms[p.x + 1, p.y] != null)
+            if (p.x != 10)
             {
-                count++;
+                if (SpawnedRooms[p.x + 1, p.y] != null)
+                {
+                    count++;
+                }
             }
-            if (SpawnedRooms[p.x - 1, p.y] != null)
+            if (p.x != 0)
             {
-                count++;
+                if (SpawnedRooms[p.x - 1, p.y] != null)
+                {
+                    count++;
+                }
             }
-            if (count > 1)
+            if (count != 1)
             {
                 return false;
             }
