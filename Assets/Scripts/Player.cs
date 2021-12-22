@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,14 +7,15 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D _rb;
     private float _userInputHorizontal, _userInputVertical;
+    public static float tears = 0.5f, speed = 2;
     private Vector3 _vec;
     public static float angle;
     private bool fire = false, abilitytofire = true;
     public GameObject Bullet;
     public Transform Mouth;
     public static Vector3 position;
+    public static Item[] MyItems;
 
-    
     void FireDelay()
     {
         abilitytofire = true;
@@ -30,7 +32,7 @@ public class Player : MonoBehaviour
         {
             fire = true;
             abilitytofire = false;
-            Invoke("FireDelay", 0.5f);
+            Invoke("FireDelay", tears);
         }
 
     }
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        _rb.velocity = new Vector2(_userInputHorizontal*2, _userInputVertical*2);
+        _rb.velocity = new Vector2(_userInputHorizontal*speed, _userInputVertical*speed);
         _rb.rotation = angle;
         if (fire)
         {
@@ -47,5 +49,12 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 7)
+        {
+            CanvasScript.AddNewItem(other.gameObject.GetComponent<SpriteRenderer>().sprite);
+            Destroy(other.gameObject);
+        }
+    }
 }

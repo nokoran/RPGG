@@ -131,6 +131,7 @@ MonoBehaviour:
   _rb: {fileID: 3653814627814839494}
   Bullet: {fileID: 5477873677556477115, guid: 47129e18af352ac4f8d0cfddf58b55c9, type: 3}
   Mouth: {fileID: 7173803146101793958}
+  ItemImage: {fileID: 1782994870489674575, guid: c53e1cf5f864c6242937c43ce6ff593d, type: 3}
 --- !u!50 &3653814627814839494
 Rigidbody2D:
   serializedVersion: 4

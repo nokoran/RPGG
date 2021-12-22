@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public LayerMask whatIsSolid;
+    public static float range = 1f, shotspeed = 10f;
     void Destroy()
     {
         Destroy(gameObject);
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        Invoke("Destroy", 1);
+        Invoke("Destroy", range);
     }
 
     void FixedUpdate()
@@ -21,8 +22,8 @@ public class Bullet : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, 0, whatIsSolid);
         if (hitInfo.collider != null)
         {
-            Destroy(gameObject);
+            Destroy();
         }
-        transform.Translate(Vector2.right * 10 * Time.deltaTime);
+        transform.Translate(Vector2.right * shotspeed * Time.deltaTime);
     }
 }
