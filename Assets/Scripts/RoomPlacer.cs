@@ -42,7 +42,7 @@ public class RoomPlacer : MonoBehaviour
         if (!bossex)
         {
             int a = 3;
-            Room newRoom = Instantiate(RoomPrefabs[a]);
+            Room newRoom = Instantiate(RoomPrefabs[Random.Range(a, RoomPrefabs.Length)]);
             int limit = 500;
             while (limit-- > 0)
             {
