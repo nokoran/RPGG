@@ -62,12 +62,13 @@ public class RoomPlacer : MonoBehaviour
         {
             int limit = 500;
             int a = 0;
-            M2:
+        M2:
+            
             Room newRoom = Instantiate(RoomPrefabs[a]);
             while (limit-- > 0)
             {
                 Debug.Log(limit);
-                M1:
+            M1:
                 Vector2Int position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
                 if ((position.x < 4 || position.x > 6) && (position.y < 4 || position.y > 6))
                 {
@@ -82,6 +83,7 @@ public class RoomPlacer : MonoBehaviour
                 {
                     newRoom.transform.position = new Vector3(position.x - 5, position.y - 5, 0) * 14;
                     SpawnedRooms[position.x, position.y] = newRoom;
+                    vacantPlaces.Remove(position);
                     if (a == 3)
                     {
                         return;
@@ -91,6 +93,7 @@ public class RoomPlacer : MonoBehaviour
                         a++;
                         goto M2;
                     }
+                    
                 }
                 else
                 {
@@ -98,7 +101,7 @@ public class RoomPlacer : MonoBehaviour
                     goto M2;
                 }
             }
-            Scene scene = SceneManager.GetActiveScene();
+            Scene scene = SceneManager.GetActiveScene(); 
             SceneManager.LoadScene(scene.name);
             Destroy(newRoom.gameObject);
         }
