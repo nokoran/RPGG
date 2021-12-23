@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public GameObject Bullet;
     public Transform Mouth;
     public static Vector3 position;
-    public static Item[] MyItems;
+    public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
 
     void FireDelay()
     {
@@ -53,8 +53,20 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == 7)
         {
+            MyItems.Add(Item.AllItems[RoomPlacer.NewItem]);
+            ChangeStats(RoomPlacer.NewItem);
+            CanvasScript.StatsChanged();
             CanvasScript.AddNewItem(other.gameObject.GetComponent<SpriteRenderer>().sprite);
             Destroy(other.gameObject);
         }
+    }
+
+    private void ChangeStats(int ID)
+    {
+        tears += Item.AllItems[ID].tears;
+        speed += Item.AllItems[ID].speed;
+        global::Bullet.range += Item.AllItems[ID].range;
+        global::Bullet.shotspeed += Item.AllItems[ID].shotspeed;
+        
     }
 }

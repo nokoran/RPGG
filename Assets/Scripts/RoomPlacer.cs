@@ -10,6 +10,7 @@ public class RoomPlacer : MonoBehaviour
     public Room StartingRoom;
     private Room[,] SpawnedRooms;
     public bool bossex;
+    public static int NewItem;
     private IEnumerator Start()
     {
         SpawnedRooms = new Room[11, 11];
@@ -60,10 +61,13 @@ public class RoomPlacer : MonoBehaviour
         }
         else
         {
-            int limit = 500;
+            int limit = 100;
             int a = 0;
         M2:
-            
+            if (a == 1)
+            {
+                NewItem = Item.RandomizeItem();
+            }
             Room newRoom = Instantiate(RoomPrefabs[a]);
             while (limit-- > 0)
             {
