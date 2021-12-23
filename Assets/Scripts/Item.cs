@@ -6,7 +6,8 @@ public class Item : MonoBehaviour
 {
     public class ItemClass
     {
-        public Sprite _sprite ; 
+        public Sprite _sprite ;
+        public Material _material;
         public float tears, speed, range, shotspeed;
         public int ID;
     }
@@ -23,21 +24,18 @@ public class Item : MonoBehaviour
     void Start()
     {
 
-        AllItems.Add(new ItemClass()
+    }
+    public static void load()
+    {
+        Item.AllItems.Add(new Item.ItemClass()
         {
-            _sprite = (Sprite) Resources.Load("ItemBotinok", typeof(Sprite)),
+            _sprite = (Sprite)Resources.Load("ItemBotinok", typeof(Sprite)),
+            _material = (Material)Resources.Load("ItemBotinok", typeof(Material)),
             ID = 1,
             tears = 0f,
             speed = 2f,
             range = 0f,
             shotspeed = 0f
         });
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

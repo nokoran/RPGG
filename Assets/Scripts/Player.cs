@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        _rb.velocity = new Vector2(_userInputHorizontal*speed, _userInputVertical*speed);
+        _rb.velocity = new Vector2(_userInputHorizontal*speed, _userInputVertical*speed*2/3);
         _rb.rotation = angle;
         if (fire)
         {

@@ -13,6 +13,7 @@ public class RoomPlacer : MonoBehaviour
     public static int NewItem;
     private IEnumerator Start()
     {
+        Item.load();
         SpawnedRooms = new Room[11, 11];
         SpawnedRooms[5, 5] = StartingRoom;
 
@@ -49,7 +50,7 @@ public class RoomPlacer : MonoBehaviour
             {
                 Vector2Int position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
 
-                newRoom.RotateRandomly();
+
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
                     newRoom.transform.position = new Vector3(position.x - 5, position.y - 5, 0) * 14;
@@ -64,10 +65,7 @@ public class RoomPlacer : MonoBehaviour
             int limit = 100;
             int a = 0;
         M2:
-            if (a == 1)
-            {
-                NewItem = Item.RandomizeItem();
-            }
+
             Room newRoom = Instantiate(RoomPrefabs[a]);
             while (limit-- > 0)
             {
@@ -82,7 +80,7 @@ public class RoomPlacer : MonoBehaviour
                     goto M1;
                 }
 
-                newRoom.RotateRandomly();
+
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
                     newRoom.transform.position = new Vector3(position.x - 5, position.y - 5, 0) * 14;
@@ -94,6 +92,11 @@ public class RoomPlacer : MonoBehaviour
                     }
                     else
                     {
+                        if (a == 1)
+                        {
+                            NewItem = Item.RandomizeItem();
+                            ItemSprite.SpriteChange();
+                        }
                         a++;
                         goto M2;
                     }

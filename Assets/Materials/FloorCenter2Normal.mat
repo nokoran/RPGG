@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tile2
+  m_Name: FloorCenter2Normal
   m_Shader: {fileID: 4800000, guid: bcee860c87626484f9e07968c4216b1f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
