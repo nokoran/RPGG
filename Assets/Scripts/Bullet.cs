@@ -19,11 +19,12 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
+
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, 0, whatIsSolid);
         if (hitInfo.collider != null)
         {
             Destroy();
         }
-        transform.Translate(Vector2.right * shotspeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * shotspeed * Time.deltaTime);
     }
 }

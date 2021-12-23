@@ -7,16 +7,39 @@ using Random = UnityEngine.Random;
 
 public class Floor : MonoBehaviour
 {
-    public Sprite tilesprite, DefaultSprite;
-    [SerializeField] private Material TileMaterial, defaultMaterial;
-    public SpriteRenderer sr;
+    public int type;
+    public Material BossTile2, ItemTile2, ShopTile2, DefaultTile2;
+    public MeshRenderer mr;
     void Start()
     {
         int rng =  Random.Range(0, 3);
-        if (rng == 1)
+        if (type == 0)
         {
-            sr.sprite = DefaultSprite;
-            sr.material = defaultMaterial;
+            if (rng == 1)
+            {
+                mr.material = BossTile2;
+            }
+        }
+        if (type == 1)
+        {
+            if (rng == 1)
+            {
+                mr.material = ItemTile2;
+            }
+        }
+        if (type == 2)
+        {
+            if (rng == 1)
+            {
+                mr.material = ShopTile2;
+            }
+        }
+        if (type == 3)
+        {
+            if (rng == 1)
+            {
+                mr.material = DefaultTile2;
+            }
         }
     }
 }

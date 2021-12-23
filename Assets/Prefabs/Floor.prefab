@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8715494675274752467}
   - component: {fileID: 2415188016487496111}
   - component: {fileID: 708110179839303524}
+  - component: {fileID: 6606921974522425838}
   m_Layer: 0
-  m_Name: FloorCentre
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,3 +82,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6606921974522425838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969340645132357731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acd437b3c0f41f4683d1fc02622381f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  BossTile2: {fileID: 2100000, guid: a375454d20fe62645a10a4325a9c9ee7, type: 2}
+  ItemTile2: {fileID: 2100000, guid: 6a4c04021adb9014880f5ba50c7975cf, type: 2}
+  ShopTile2: {fileID: 2100000, guid: e2e31e3220f854c42ab78387df631fa2, type: 2}
+  DefaultTile2: {fileID: 2100000, guid: 54386b13b260aaf4cbd3327b1f215c44, type: 2}
+  mr: {fileID: 708110179839303524}
