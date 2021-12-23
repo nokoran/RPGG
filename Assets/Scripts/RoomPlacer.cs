@@ -53,7 +53,7 @@ public class RoomPlacer : MonoBehaviour
 
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
-                    newRoom.transform.position = new Vector3(position.x - 5, position.y - 5, 0) * 14;
+                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 14;
                     SpawnedRooms[position.x, position.y] = newRoom;
                     return;
                 }
@@ -83,7 +83,7 @@ public class RoomPlacer : MonoBehaviour
 
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
-                    newRoom.transform.position = new Vector3(position.x - 5, position.y - 5, 0) * 14;
+                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 14;
                     SpawnedRooms[position.x, position.y] = newRoom;
                     vacantPlaces.Remove(position);
                     if (a == 3)

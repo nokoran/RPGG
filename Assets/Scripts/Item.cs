@@ -6,7 +6,8 @@ public class Item : MonoBehaviour
 {
     public class ItemClass
     {
-        public Sprite _sprite ;
+        public Mesh _mesh ;
+        public Sprite _Sprite;
         public Material _material;
         public float tears, speed, range, shotspeed;
         public int ID;
@@ -29,8 +30,9 @@ public class Item : MonoBehaviour
     {
         Item.AllItems.Add(new Item.ItemClass()
         {
-            _sprite = (Sprite)Resources.Load("ItemBotinok", typeof(Sprite)),
-            _material = (Material)Resources.Load("ItemBotinok", typeof(Material)),
+            _Sprite = Resources.Load<Sprite>("Boots"),
+            _mesh = Resources.Load<GameObject>("Boots").transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh,
+            _material = Resources.Load<Material>("Boots"),
             ID = 1,
             tears = 0f,
             speed = 2f,

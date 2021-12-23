@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ItemSprite : MonoBehaviour
 {
-    public static SpriteRenderer sr;
+    public static MeshFilter mf;
+    public static MeshRenderer mr;
     public void Awake()
     {
-        sr = transform.GetComponent<SpriteRenderer>();
+        mf = transform.GetComponent<MeshFilter>();
+        mr = transform.GetComponent<MeshRenderer>();
     }
     public static void SpriteChange()
     {
 
-        sr.sprite = Item.AllItems[RoomPlacer.NewItem]._sprite;
-        sr.material = Item.AllItems[RoomPlacer.NewItem]._material;
+        mf.mesh = Item.AllItems[RoomPlacer.NewItem]._mesh;
+        mr.material = Item.AllItems[RoomPlacer.NewItem]._material;
     }
 }

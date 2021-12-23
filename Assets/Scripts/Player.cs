@@ -5,9 +5,9 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D _rb;
+    public Rigidbody _rb;
     private float _userInputHorizontal, _userInputVertical;
-    public static float tears = 0.5f, speed = 2;
+    public static float tears = 0.5f, speed = 7;
     private Vector3 _vec;
     public static float angle;
     private bool fire = false, abilitytofire = true;
@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
         position = transform.position;
         _userInputHorizontal = Input.GetAxis("Horizontal");
         _userInputVertical = Input.GetAxis("Vertical");
-        _vec = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        angle = Mathf.Atan2(_vec.y, _vec.x) * Mathf.Rad2Deg;
+        //_vec = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        //angle = Mathf.Atan2(_vec.y, _vec.x) * Mathf.Rad2Deg;
         if (Input.GetMouseButton(0) && abilitytofire)
         {
             fire = true;
@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        _rb.velocity = new Vector2(_userInputHorizontal*speed, _userInputVertical*speed*2/3);
-        _rb.rotation = angle;
+        _rb.velocity = new Vector3(_userInputHorizontal*speed, _rb.velocity.y, _userInputVertical*speed);
+        //_rb.rotation = angle;
         if (fire)
         {
             Instantiate(Bullet, Mouth.position, transform.rotation);
@@ -49,14 +49,14 @@ public class Player : MonoBehaviour
         }
 
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 7)
         {
             MyItems.Add(Item.AllItems[RoomPlacer.NewItem]);
             ChangeStats(RoomPlacer.NewItem);
             CanvasScript.StatsChanged();
-            CanvasScript.AddNewItem(other.gameObject.GetComponent<SpriteRenderer>().sprite);
+            CanvasScript.AddNewItem(Item.AllItems[RoomPlacer.NewItem]._Sprite);
             Destroy(other.gameObject);
         }
     }
