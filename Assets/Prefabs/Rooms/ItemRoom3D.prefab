@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6266568228543468507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 2.514, z: 6.5}
+  m_LocalPosition: {x: 6.5, y: 0.51399994, z: 6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4814739855328419487}
@@ -535,7 +535,6 @@ MonoBehaviour:
   DoorRight: {fileID: 7285210710414237992}
   DoorBottom: {fileID: 4259517709005335752}
   DoorLeft: {fileID: 6627174194169645832}
-  floor: []
 --- !u!1001 &124221020463301139
 PrefabInstance:
   m_ObjectHideFlags: 0
