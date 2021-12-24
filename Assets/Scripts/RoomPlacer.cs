@@ -20,7 +20,7 @@ public class RoomPlacer : MonoBehaviour
         for (int i = 0; i<20; i++)
         {
             PlaceOneRoom(bossex);
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return new WaitForSecondsRealtime(0.1f);
         }
         bossex = true;
         PlaceOneRoom(bossex);
@@ -53,7 +53,7 @@ public class RoomPlacer : MonoBehaviour
 
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
-                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 14;
+                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 18;
                     SpawnedRooms[position.x, position.y] = newRoom;
                     return;
                 }
@@ -83,10 +83,10 @@ public class RoomPlacer : MonoBehaviour
 
                 if (ConnectToSomething(newRoom, position, bossex))
                 {
-                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 14;
+                    newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 18;
                     SpawnedRooms[position.x, position.y] = newRoom;
                     vacantPlaces.Remove(position);
-                    if (a == 3)
+                    if (a == 2)
                     {
                         return;
                     }
@@ -169,26 +169,54 @@ public class RoomPlacer : MonoBehaviour
             Vector2Int selectedDirection = neighbours[i];
             Room selectedRoom = SpawnedRooms[p.x + selectedDirection.x, p.y + selectedDirection.y];
 
-            if (selectedDirection == Vector2Int.up)
+            //поебота которая хуй знает как работает
+            if (count == 1)
             {
-                room.DoorTop.SetActive(false);
-                selectedRoom.DoorBottom.SetActive(false);
+                if (selectedDirection == Vector2Int.up)
+                {
+                    room.DoorTop.SetActive(true);
+                    selectedRoom.DoorTop.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.down)
+                {
+                    room.DoorBottom.SetActive(true);
+                    selectedRoom.DoorBottom.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.right)
+                {
+                    room.DoorRight.SetActive(true);
+                    selectedRoom.DoorRight.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.left)
+                {
+                    room.DoorLeft.SetActive(true);
+                    selectedRoom.DoorLeft.SetActive(true);
+                }
             }
-            else if (selectedDirection == Vector2Int.down)
+            else
             {
-                room.DoorBottom.SetActive(false);
-                selectedRoom.DoorTop.SetActive(false);
+                if (selectedDirection == Vector2Int.down)
+                {
+                    room.DoorTop.SetActive(true);
+                    selectedRoom.DoorBottom.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.up)
+                {
+                    room.DoorBottom.SetActive(true);
+                    selectedRoom.DoorTop.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.left)
+                {
+                    room.DoorRight.SetActive(true);
+                    selectedRoom.DoorLeft.SetActive(true);
+                }
+                else if (selectedDirection == Vector2Int.right)
+                {
+                    room.DoorLeft.SetActive(true);
+                    selectedRoom.DoorRight.SetActive(true);
+                }
             }
-            else if (selectedDirection == Vector2Int.right)
-            {
-                room.DoorRight.SetActive(false);
-                selectedRoom.DoorLeft.SetActive(false);
-            }
-            else if (selectedDirection == Vector2Int.left)
-            {
-                room.DoorLeft.SetActive(false);
-                selectedRoom.DoorRight.SetActive(false);
-            }
+            
         }
         return true;
     }
