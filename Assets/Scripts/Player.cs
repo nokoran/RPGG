@@ -1,31 +1,51 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody _rb;
-    private float _userInputHorizontal, _userInputVertical;
+    public Transform cam;
+    public CharacterController cc;
+    private float turnSmoothTime = 0.1f, turmSmoothVelocity;
+    private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
     public static float tears = 0.5f, speed = 7;
     private Vector3 _vec;
-    public static float angle;
-    private bool fire = false, abilitytofire = true;
+    private bool fire, abilitytofire = true;
     public GameObject Bullet;
     public Transform Mouth;
-    public static Vector3 position;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
 
     void FireDelay()
     {
         abilitytofire = true;
     }
-    
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Update()
     {
-        position = transform.position;
-        _userInputHorizontal = Input.GetAxis("Horizontal");
-        _userInputVertical = Input.GetAxis("Vertical");
+        _userInputHorizontal = Input.GetAxisRaw("Horizontal");
+        _userInputVertical = Input.GetAxisRaw("Vertical");
+        _userMouseHorizontal += Input.GetAxis("Mouse X");
+        _userMouseVertical += Input.GetAxis("Mouse Y");
+        transform.localRotation = Quaternion.Euler(0, _userMouseHorizontal * 2f, 0);
+        Vector3 direction = new Vector3(_userInputHorizontal*speed, 0, _userInputVertical*speed);
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetangle, ref turmSmoothVelocity, turnSmoothTime);
+            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            
+            Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
+            cc.Move(MoveDir.normalized * speed * Time.deltaTime);
+        }
+        
         //_vec = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         //angle = Mathf.Atan2(_vec.y, _vec.x) * Mathf.Rad2Deg;
         if (Input.GetMouseButton(0) && abilitytofire)
@@ -39,8 +59,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        _rb.velocity = new Vector3(_userInputHorizontal*speed, _rb.velocity.y, _userInputVertical*speed);
+        //Vector3 direction = new Vector3(_userInputHorizontal*speed, _rb.velocity.y, _userInputVertical*speed);
+        //_rb.velocity = direction.normalized;
         //_rb.rotation = angle;
         if (fire)
         {

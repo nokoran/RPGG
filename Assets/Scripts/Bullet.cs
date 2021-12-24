@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public LayerMask whatIsSolid;
-    public static float range = 1f, shotspeed = 10f;
+    public static float range = 1f, shotspeed = 2f;
     void Destroy()
     {
         Destroy(gameObject);
@@ -25,6 +25,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy();
         }
-        transform.Translate(Vector3.forward * shotspeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * (shotspeed * 10) * Time.deltaTime);
     }
 }

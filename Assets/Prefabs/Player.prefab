@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1711676400951616544}
   - component: {fileID: 8000478386455788920}
   - component: {fileID: 6843738819784422697}
+  - component: {fileID: -1080644715317905095}
   - component: {fileID: 7133318430670747269}
   m_Layer: 3
   m_Name: Player
@@ -59,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7473721206618757222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7173803146101793958}
@@ -145,6 +146,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &-1080644715317905095
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473721206618757222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7133318430670747269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 8000478386455788920}
+  cam: {fileID: 0}
+  cc: {fileID: -1080644715317905095}
   Bullet: {fileID: 5477873677556477115, guid: 47129e18af352ac4f8d0cfddf58b55c9, type: 3}
   Mouth: {fileID: 7173803146101793958}
 --- !u!1 &8459249085111682921
