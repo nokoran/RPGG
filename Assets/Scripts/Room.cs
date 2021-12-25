@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public GameObject DoorTop, DoorRight, DoorBottom, DoorLeft;
+    public GameObject DoorTop, DoorRight, DoorBottom, DoorLeft, ColliderTop, ColliderBottom, ColliderRight, ColliderLeft;
 }

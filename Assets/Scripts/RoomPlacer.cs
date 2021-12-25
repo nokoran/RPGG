@@ -168,55 +168,36 @@ public class RoomPlacer : MonoBehaviour
         {
             Vector2Int selectedDirection = neighbours[i];
             Room selectedRoom = SpawnedRooms[p.x + selectedDirection.x, p.y + selectedDirection.y];
-
-            //поебота которая хуй знает как работает
-            if (count == 1)
-            {
-                if (selectedDirection == Vector2Int.up)
-                {
-                    room.DoorTop.SetActive(true);
-                    selectedRoom.DoorTop.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.down)
-                {
-                    room.DoorBottom.SetActive(true);
-                    selectedRoom.DoorBottom.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.right)
-                {
-                    room.DoorRight.SetActive(true);
-                    selectedRoom.DoorRight.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.left)
-                {
-                    room.DoorLeft.SetActive(true);
-                    selectedRoom.DoorLeft.SetActive(true);
-                }
-            }
-            else
-            {
-                if (selectedDirection == Vector2Int.down)
-                {
-                    room.DoorTop.SetActive(true);
-                    selectedRoom.DoorBottom.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.up)
-                {
-                    room.DoorBottom.SetActive(true);
-                    selectedRoom.DoorTop.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.left)
-                {
-                    room.DoorRight.SetActive(true);
-                    selectedRoom.DoorLeft.SetActive(true);
-                }
-                else if (selectedDirection == Vector2Int.right)
-                {
-                    room.DoorLeft.SetActive(true);
-                    selectedRoom.DoorRight.SetActive(true);
-                }
-            }
             
+            if (selectedDirection == Vector2Int.up)
+            {
+                room.DoorTop.SetActive(true);
+                room.ColliderTop.SetActive(false);
+                selectedRoom.DoorBottom.SetActive(true);
+                selectedRoom.ColliderBottom.SetActive(false);
+            }
+            else if (selectedDirection == Vector2Int.down)
+            {
+                room.DoorBottom.SetActive(true);
+                room.ColliderBottom.SetActive(false);
+                selectedRoom.DoorTop.SetActive(true);
+                selectedRoom.ColliderTop.SetActive(false);
+            }
+            else if (selectedDirection == Vector2Int.right)
+            {
+                room.DoorRight.SetActive(true);
+                room.ColliderRight.SetActive(false);
+                selectedRoom.DoorLeft.SetActive(true);
+                selectedRoom.ColliderLeft.SetActive(false);
+            }
+            else if (selectedDirection == Vector2Int.left)
+            {
+                room.DoorLeft.SetActive(true);
+                room.ColliderLeft.SetActive(false);
+                selectedRoom.DoorRight.SetActive(true);
+                selectedRoom.ColliderRight.SetActive(false);
+            }
+                
         }
         return true;
     }
