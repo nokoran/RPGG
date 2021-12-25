@@ -25,9 +25,9 @@ public class Item : MonoBehaviour
     {
         Item.AllItems.Add(new Item.ItemClass()
         {
-            _Sprite = Resources.Load<Sprite>("Boots"),
-            _mesh = Resources.Load<GameObject>("Boots").transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh,
-            _material = Resources.Load<Material>("Boots"),
+            _Sprite = Resources.Load<Sprite>("Sprites/Boots"),
+            _mesh = Resources.Load<GameObject>("Vox/Boots").transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh,
+            _material = Resources.Load<Material>("Materials/Boots"),
             ID = 1,
             tears = 0f,
             speed = 2f,

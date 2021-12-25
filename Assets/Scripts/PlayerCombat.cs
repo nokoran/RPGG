@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerCombat : MonoBehaviour
 {
-    public static float range = 1f, shotspeed = 0.5f, damage = 10f;
+    public static float range, shotspeed = 2f, damage;
     void Destroy()
     {
         Destroy(gameObject);

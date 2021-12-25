@@ -9,15 +9,30 @@ public class Player : MonoBehaviour
 {
     public Transform cam;
     public CharacterController cc;
-    private Room currentRoom;
-    private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
-    public static float tears = 0.5f, speed = 7;
-    private Vector3 _vec;
-    private bool fire, abilitytofire = true;
-    public static bool levelCreated;
-    public GameObject Bullet;
+    public GameObject bullet;
     public Transform Mouth;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
+    private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
+    public static float attackspeed, speed;
+    public static int hp;
+    private bool Attack, abilitytofire = true;
+    public int CurrentClass;
+    public LayerMask EnemyLayers;
+
+    private Room currentRoom;
+
+    public class Class
+    {
+        public string name;
+        public int hp;
+        public float attackspeed, speed, damage, range;
+
+    }
+    public List<Class> Classes = new List<Class>
+    {
+        new Class{name = "Mage", hp = 80, attackspeed = 0.5f, speed = 7f, damage = 10f, range = 2f},
+        new Class{name = "Warrior", hp = 120, attackspeed = 0.75f, speed = 4f, damage = 15f, range = 1f}
+    };
 
     void FireDelay()
     {
@@ -110,6 +125,12 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        attackspeed = Classes[CurrentClass].attackspeed;
+        speed = Classes[CurrentClass].speed;
+        PlayerCombat.damage = Classes[CurrentClass].damage;
+        PlayerCombat.range = Classes[CurrentClass].range;
+        hp = Classes[CurrentClass].hp;
+        CanvasScript.StatsChanged();
     }
 
     void Update()
@@ -127,25 +148,39 @@ public class Player : MonoBehaviour
             Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
             cc.Move(MoveDir.normalized * speed * Time.deltaTime);
         }
-        
+
         if (Input.GetMouseButton(0) && abilitytofire)
         {
-            fire = true;
+            Attack = true;
+            AttackEvent();
             abilitytofire = false;
-            Invoke("FireDelay", tears);
+            Invoke("FireDelay", attackspeed);
         }
 
     }
 
-    private void FixedUpdate()
+    private void AttackEvent()
     {
-        if (fire)
+        if (Attack && CurrentClass == 0)
         {
-            Instantiate(Bullet, Mouth.position, transform.rotation);
-            fire = false;
+            Instantiate(bullet, Mouth.position, transform.rotation);
+            Attack = false;
         }
-
+        else if (Attack && CurrentClass == 1)
+        {
+            Collider[] hitEnemies = Physics.OverlapSphere(Mouth.position, PlayerCombat.range, EnemyLayers);
+            foreach (Collider enemy in hitEnemies)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage();
+            }
+            Attack = false;
+        }
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(Mouth.position, PlayerCombat.range);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 7)
@@ -157,7 +192,7 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.layer == 12 && levelCreated)
+        if (other.gameObject.layer == 12)
         {
             HideRooms((int)other.transform.parent.gameObject.transform.position.x, (int)other.transform.parent.gameObject.transform.position.z);
         }
@@ -165,11 +200,10 @@ public class Player : MonoBehaviour
 
     private void ChangeStats(int ID)
     {
-        tears += Item.AllItems[ID].tears;
+        attackspeed += Item.AllItems[ID].tears;
         speed += Item.AllItems[ID].speed;
-        global::Bullet.range += Item.AllItems[ID].range;
-        global::Bullet.shotspeed += Item.AllItems[ID].shotspeed;
+        global::PlayerCombat.range += Item.AllItems[ID].range;
+        global::PlayerCombat.shotspeed += Item.AllItems[ID].shotspeed;
         
     }
-
 }

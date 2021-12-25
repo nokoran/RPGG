@@ -7,13 +7,14 @@ using UnityEngine.AI;
 
 public class RoomPlacer : MonoBehaviour
 {
+    public static GameObject newPlayer, newEnemy;
     public Room[] RoomPrefabs;
     public Room StartingRoom;
     public static Room[,] SpawnedRooms;
     public bool bossex;
     public static int NewItem;
     public GameObject surface;
-    private void Start()
+    private IEnumerator Start()
     {
         Item.load();
         SpawnedRooms = new Room[11, 11];
@@ -27,8 +28,11 @@ public class RoomPlacer : MonoBehaviour
         surface.GetComponent<NavMeshSurface>().BuildNavMesh();
         PlaceOneRoom(bossex);
         Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
-        Player.levelCreated = true;
-
+        yield return new WaitForSeconds(0.1f);
+        newPlayer =  Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
+        newPlayer.transform.position = new Vector3(7.5f, 0.5f, 5.5f);
+        newEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
+        newEnemy.transform.position = new Vector3(0f, 0.5f, 0f);
     }
     private void PlaceOneRoom(bool bossex)
     {
