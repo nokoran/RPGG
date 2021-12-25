@@ -9,11 +9,12 @@ public class Player : MonoBehaviour
 {
     public Transform cam;
     public CharacterController cc;
-    private float turnSmoothTime = 0.1f, turmSmoothVelocity;
+    private Room currentRoom;
     private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
     public static float tears = 0.5f, speed = 7;
     private Vector3 _vec;
     private bool fire, abilitytofire = true;
+    public static bool levelCreated;
     public GameObject Bullet;
     public Transform Mouth;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
@@ -23,6 +24,89 @@ public class Player : MonoBehaviour
         abilitytofire = true;
     }
 
+    public static void HideRooms(int x, int z)
+    {
+        Vector2Int p = new Vector2Int(x/18 + 5, z/18 + 5);
+        int maxX = RoomPlacer.SpawnedRooms.GetLength(0) - 1;
+        int maxY = RoomPlacer.SpawnedRooms.GetLength(1) - 1;
+        List<Vector2Int> neighbours = new List<Vector2Int>();
+        if (RoomPlacer.SpawnedRooms[p.x, p.y].DoorTop != null && p.y < maxY && RoomPlacer.SpawnedRooms[p.x, p.y + 1]?.DoorBottom != null)
+        {
+            Vector2Int room = new Vector2Int(p.x, p.y + 1); 
+            neighbours.Add(room);
+        }
+        if (RoomPlacer.SpawnedRooms[p.x, p.y].DoorBottom != null && p.y > 0 && RoomPlacer.SpawnedRooms[p.x, p.y - 1]?.DoorTop != null)
+        {
+            Vector2Int room = new Vector2Int(p.x, p.y - 1); 
+            neighbours.Add(room);
+        }
+        if (RoomPlacer.SpawnedRooms[p.x, p.y].DoorRight != null && p.x < maxX && RoomPlacer.SpawnedRooms[p.x + 1, p.y]?.DoorLeft != null)
+        {
+            Vector2Int room = new Vector2Int(p.x + 1, p.y); 
+            neighbours.Add(room);
+        }
+        if (RoomPlacer.SpawnedRooms[p.x, p.y].DoorLeft != null && p.x > 0 && RoomPlacer.SpawnedRooms[p.x - 1, p.y]?.DoorRight != null)
+        {
+            Vector2Int room = new Vector2Int(p.x - 1, p.y); 
+            neighbours.Add(room);
+        }
+        
+        for (int i = 0; i <= maxX; i++)
+        {
+            for (int j = 0; j <= maxY; j++)
+            {
+                if (p.x == i && p.y == j)
+                {
+                    continue;
+                }
+                if (neighbours.Count == 4 && RoomPlacer.SpawnedRooms[i,j] != null)
+                {
+                    if ((neighbours[0].x == i && neighbours[0].y == j) || (neighbours[1].x == i && neighbours[1].y == j) || (neighbours[2].x == i && neighbours[2].y == j) || (neighbours[3].x == i && neighbours[3].y == j))
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(false);
+                    }
+                }
+                else if (neighbours.Count == 3 && RoomPlacer.SpawnedRooms[i,j] != null)
+                {
+                    if ((neighbours[0].x == i && neighbours[0].y == j) || (neighbours[1].x == i && neighbours[1].y == j) || (neighbours[2].x == i && neighbours[2].y == j))
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(false);
+                    }
+                }
+                else if (neighbours.Count == 2 && RoomPlacer.SpawnedRooms[i,j] != null)
+                {
+                    if ((neighbours[0].x == i && neighbours[0].y == j) || (neighbours[1].x == i && neighbours[1].y == j))
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(false);
+                    }
+                }
+                else if (neighbours.Count == 1 && RoomPlacer.SpawnedRooms[i,j] != null)
+                {
+                    if (neighbours[0].x == i && neighbours[0].y == j)
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        RoomPlacer.SpawnedRooms[i,j].gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+    }
+    
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -39,7 +123,6 @@ public class Player : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetangle, ref turmSmoothVelocity, turnSmoothTime);
             //transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
             Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
@@ -78,6 +161,12 @@ public class Player : MonoBehaviour
             CanvasScript.StatsChanged();
             CanvasScript.AddNewItem(Item.AllItems[RoomPlacer.NewItem]._Sprite);
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.layer == 12 && levelCreated)
+        {
+            //Debug.Log(22);
+            HideRooms((int)other.transform.parent.gameObject.transform.position.x, (int)other.transform.parent.gameObject.transform.position.z);
         }
     }
 

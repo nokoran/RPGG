@@ -688,6 +688,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420032}
+    - target: {fileID: 7133318430670747269, guid: 582be34049e2a5242b9dfaffad769aaa, type: 3}
+      propertyPath: currRoom
+      value: 
+      objectReference: {fileID: 988164493}
     - target: {fileID: 7173803146101793958, guid: 582be34049e2a5242b9dfaffad769aaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

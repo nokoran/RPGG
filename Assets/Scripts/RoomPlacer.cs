@@ -8,7 +8,7 @@ public class RoomPlacer : MonoBehaviour
 {
     public Room[] RoomPrefabs;
     public Room StartingRoom;
-    private Room[,] SpawnedRooms;
+    public static Room[,] SpawnedRooms;
     public bool bossex;
     public static int NewItem;
     private IEnumerator Start()
@@ -24,6 +24,9 @@ public class RoomPlacer : MonoBehaviour
         }
         bossex = true;
         PlaceOneRoom(bossex);
+        Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
+        Player.levelCreated = true;
+
     }
     private void PlaceOneRoom(bool bossex)
     {
@@ -69,7 +72,7 @@ public class RoomPlacer : MonoBehaviour
             Room newRoom = Instantiate(RoomPrefabs[a]);
             while (limit-- > 0)
             {
-                Debug.Log(limit);
+                //Debug.Log(limit);
             M1:
                 Vector2Int position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
                 if ((position.x < 4 || position.x > 6) && (position.y < 4 || position.y > 6))
