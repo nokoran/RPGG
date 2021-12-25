@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Doors
   - Water
   - UI
   - Wall
@@ -19,7 +19,7 @@ TagManager:
   - Bullet Ash
   - Bullet
   - HideRoom
-  - 
+  - Enemy
   - 
   - 
   - 

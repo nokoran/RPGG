@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class RoomPlacer : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class RoomPlacer : MonoBehaviour
     public static Room[,] SpawnedRooms;
     public bool bossex;
     public static int NewItem;
-    private IEnumerator Start()
+    public GameObject surface;
+    private void Start()
     {
         Item.load();
         SpawnedRooms = new Room[11, 11];
@@ -20,9 +22,9 @@ public class RoomPlacer : MonoBehaviour
         for (int i = 0; i<20; i++)
         {
             PlaceOneRoom(bossex);
-            yield return new WaitForSecondsRealtime(0.1f);
         }
         bossex = true;
+        surface.GetComponent<NavMeshSurface>().BuildNavMesh();
         PlaceOneRoom(bossex);
         Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
         Player.levelCreated = true;

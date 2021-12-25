@@ -21,11 +21,6 @@ public class Item : MonoBehaviour
         Debug.Log(ID);
         return ID;
     }
-    
-    void Start()
-    {
-
-    }
     public static void load()
     {
         Item.AllItems.Add(new Item.ItemClass()

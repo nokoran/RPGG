@@ -123,14 +123,11 @@ public class Player : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
             Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
             cc.Move(MoveDir.normalized * speed * Time.deltaTime);
         }
         
-        //_vec = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        //angle = Mathf.Atan2(_vec.y, _vec.x) * Mathf.Rad2Deg;
         if (Input.GetMouseButton(0) && abilitytofire)
         {
             fire = true;
@@ -142,9 +139,6 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Vector3 direction = new Vector3(_userInputHorizontal*speed, _rb.velocity.y, _userInputVertical*speed);
-        //_rb.velocity = direction.normalized;
-        //_rb.rotation = angle;
         if (fire)
         {
             Instantiate(Bullet, Mouth.position, transform.rotation);
@@ -165,7 +159,6 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.layer == 12 && levelCreated)
         {
-            //Debug.Log(22);
             HideRooms((int)other.transform.parent.gameObject.transform.position.x, (int)other.transform.parent.gameObject.transform.position.z);
         }
     }
@@ -178,4 +171,5 @@ public class Player : MonoBehaviour
         global::Bullet.shotspeed += Item.AllItems[ID].shotspeed;
         
     }
+
 }

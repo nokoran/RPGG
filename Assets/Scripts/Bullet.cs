@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public LayerMask whatIsSolid;
-    public static float range = 1f, shotspeed = 2f;
+    public static float range = 1f, shotspeed = 0.5f, damage = 10f;
     void Destroy()
     {
         Destroy(gameObject);
@@ -19,12 +18,14 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
+        transform.Translate(Vector3.forward * (shotspeed * 10) * Time.deltaTime);
+    }
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, 0, whatIsSolid);
-        if (hitInfo.collider != null)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 12)
         {
             Destroy();
         }
-        transform.Translate(Vector3.forward * (shotspeed * 10) * Time.deltaTime);
     }
 }
