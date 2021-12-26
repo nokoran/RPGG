@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public float maxHP, HP, armor;
-    public Transform player;
+    private Vector3 eposition, pposition;
     private void Start()
     {
         maxHP = HP;

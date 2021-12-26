@@ -35,7 +35,7 @@ public class CanvasScript : MonoBehaviour
     public static void AddNewItem(Sprite ItemImage)
     {
         M1:
-        var newItem = (GameObject) Instantiate(Resources.Load("ItemImageTemplate", typeof(GameObject))) as GameObject;
+        var newItem = (GameObject) Instantiate(Resources.Load("Prefabs/ItemImageTemplate", typeof(GameObject))) as GameObject;
         if (newItem == null) goto M1;
         newItem.gameObject.transform.SetParent(MyCanvas.transform);
         newItem.gameObject.GetComponent<Image>().sprite = ItemImage;

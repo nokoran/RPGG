@@ -21,7 +21,7 @@ public class PlayerCombat : MonoBehaviour
         transform.Translate(Vector3.forward * (shotspeed * 10) * Time.deltaTime);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer == 12)
         {

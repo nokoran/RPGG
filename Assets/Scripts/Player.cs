@@ -7,19 +7,19 @@ using Cursor = UnityEngine.Cursor;
 
 public class Player : MonoBehaviour
 {
-    public Transform cam;
+    private Transform cam;
     public CharacterController cc;
     public GameObject bullet;
     public Transform Mouth;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
     private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
+    public static Transform player;
     public static float attackspeed, speed;
     public static int hp;
     private bool Attack, abilitytofire = true;
     public int CurrentClass;
     public LayerMask EnemyLayers;
-
-    private Room currentRoom;
+    
 
     public class Class
     {
@@ -124,6 +124,8 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        player = transform;
+        cam = transform.GetChild(2).transform;
         Cursor.lockState = CursorLockMode.Locked;
         attackspeed = Classes[CurrentClass].attackspeed;
         speed = Classes[CurrentClass].speed;
@@ -190,13 +192,15 @@ public class Player : MonoBehaviour
             CanvasScript.StatsChanged();
             CanvasScript.AddNewItem(Item.AllItems[RoomPlacer.NewItem]._Sprite);
             Destroy(other.gameObject);
+            
         }
-
         if (other.gameObject.layer == 12)
         {
             HideRooms((int)other.transform.parent.gameObject.transform.position.x, (int)other.transform.parent.gameObject.transform.position.z);
         }
+        
     }
+
 
     private void ChangeStats(int ID)
     {
