@@ -17,10 +17,8 @@ public class Player : MonoBehaviour
     public static float attackspeed, speed;
     public static int hp;
     private bool Attack, abilitytofire = true;
-    public int CurrentClass;
+    private static int CurrentClass;
     public LayerMask EnemyLayers;
-    
-
     public class Class
     {
         public string name;
@@ -28,12 +26,16 @@ public class Player : MonoBehaviour
         public float attackspeed, speed, damage, range;
 
     }
-    public List<Class> Classes = new List<Class>
+    public static List<Class> Classes = new List<Class>
     {
         new Class{name = "Mage", hp = 80, attackspeed = 0.5f, speed = 7f, damage = 10f, range = 2f},
         new Class{name = "Warrior", hp = 120, attackspeed = 0.75f, speed = 4f, damage = 15f, range = 1f}
     };
 
+    public static void ChangeClass(int ChosenClass)
+    {
+        CurrentClass = ChosenClass;
+    }
     void FireDelay()
     {
         abilitytofire = true;
