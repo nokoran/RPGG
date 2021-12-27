@@ -1,7 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.Netcode.Samples;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    
 
     private void Start()
     {

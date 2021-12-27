@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        transform.GetComponent<NavMeshAgent>().SetDestination(RoomPlacer.newPlayer.transform.position);
+        transform.GetComponent<NavMeshAgent>().SetDestination(Player.CurentPosition);
     }
     private void OnTriggerEnter(Collider other)
     {

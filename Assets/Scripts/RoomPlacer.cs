@@ -4,10 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using Unity.Netcode;
+using Unity.Netcode.Samples;
 
-public class RoomPlacer : MonoBehaviour
+public class RoomPlacer : NetworkBehaviour
 {
-    public static GameObject newPlayer, newEnemy;
+    public static GameObject newEnemy;
     public Room[] RoomPrefabs;
     public Room StartingRoom;
     public static Room[,] SpawnedRooms;
@@ -20,21 +22,25 @@ public class RoomPlacer : MonoBehaviour
         SpawnedRooms = new Room[11, 11];
         SpawnedRooms[5, 5] = StartingRoom;
 
-        for (int i = 0; i<20; i++)
+        
+        
+        Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
+        yield return new WaitForSeconds(0.1f);
+        newEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
+        newEnemy.transform.position = new Vector3(0f, 0.5f, 0f);
+    }
+    public void StartHost()
+    {
+        for (int i = 0; i < 20; i++)
         {
             PlaceOneRoom(bossex);
+
         }
         bossex = true;
         surface.GetComponent<NavMeshSurface>().BuildNavMesh();
         PlaceOneRoom(bossex);
-        Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
-        yield return new WaitForSeconds(0.1f);
-        //newPlayer =  Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
-        //newPlayer.transform.position = new Vector3(7.5f, 0.5f, 5.5f);
-        //newEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
-        //newEnemy.transform.position = new Vector3(0f, 0.5f, 0f);
     }
-    private void PlaceOneRoom(bool bossex)
+    public void PlaceOneRoom(bool bossex)
     {
         HashSet<Vector2Int> vacantPlaces = new HashSet<Vector2Int>();
         for (int x = 0; x < SpawnedRooms.GetLength(0); x++)
@@ -64,6 +70,7 @@ public class RoomPlacer : MonoBehaviour
                 {
                     newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 18;
                     SpawnedRooms[position.x, position.y] = newRoom;
+                    newRoom.GetComponent<NetworkObject>().Spawn();
                     return;
                 }
             }

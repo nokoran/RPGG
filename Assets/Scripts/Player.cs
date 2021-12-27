@@ -25,6 +25,8 @@ public class Player : NetworkBehaviour
     private bool Attack, abilitytofire = true;
     private static int CurrentClass;
     public LayerMask EnemyLayers;
+
+    public static Vector3 CurentPosition;
     public class Class
     {
         public string name;
@@ -173,7 +175,10 @@ public class Player : NetworkBehaviour
         
         _userInputHorizontal = Input.GetAxisRaw("Horizontal");
         _userInputVertical = Input.GetAxisRaw("Vertical");
+
         direction = new Vector3(_userInputHorizontal * speed, 0, _userInputVertical * speed);
+
+
         if (direction.magnitude >= 0.1f)
         {
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -185,11 +190,10 @@ public class Player : NetworkBehaviour
             MoveDir = Vector3.zero;
             CharacterController.Move(MoveDir.normalized * speed * Time.deltaTime);
         }
-    }
+
+        CurentPosition = transform.position;
 
 
-    
-   /*
         if (Input.GetMouseButton(0) && abilitytofire)
         {
             Attack = true;
@@ -197,15 +201,18 @@ public class Player : NetworkBehaviour
             abilitytofire = false;
             Invoke("FireDelay", attackspeed);
         }
-
-    }*/
+    }
    
 
     private void AttackEvent()
     {
         if (Attack && CurrentClass == 0)
         {
-            Instantiate(bullet, Mouth.position, transform.rotation);
+            GameObject projectile = Instantiate(bullet, Mouth.position, transform.rotation);
+            if (IsHost) 
+            {
+                projectile.GetComponent<NetworkObject>().Spawn();
+            }
             Attack = false;
         }
         else if (Attack && CurrentClass == 1)

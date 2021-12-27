@@ -440,57 +440,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119519449}
   m_CullTransparentMesh: 1
---- !u!1 &628733719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 628733721}
-  - component: {fileID: 628733720}
-  m_Layer: 0
-  m_Name: RoomPlacer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &628733720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628733719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763d67225ff293e47884a438a21556f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomPrefabs:
-  - {fileID: -7723589585542406710, guid: f0fc3764977534d478c820feacf429ff, type: 3}
-  - {fileID: -7723589585542406710, guid: 4a6434ba7c081df4b9db95a9eea68d0d, type: 3}
-  - {fileID: -7723589585542406710, guid: 4a90be45ee57f7f4597e704d39310ed4, type: 3}
-  - {fileID: -7723589585542406710, guid: 1cd89568a22eae949bb0bada3e032d85, type: 3}
-  StartingRoom: {fileID: 988164493}
-  bossex: 0
-  surface: {fileID: 1226935717}
---- !u!4 &628733721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628733719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &755188047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1064,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226935717
 GameObject:
@@ -1175,7 +1124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1253005308
 GameObject:
@@ -1747,6 +1696,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684780012}
   m_CullTransparentMesh: 1
+--- !u!1 &1693212534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693212536}
+  - component: {fileID: 1693212535}
+  m_Layer: 0
+  m_Name: RoomPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1693212535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693212534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763d67225ff293e47884a438a21556f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoomPrefabs:
+  - {fileID: -7723589585542406710, guid: f0fc3764977534d478c820feacf429ff, type: 3}
+  - {fileID: -7723589585542406710, guid: 4a6434ba7c081df4b9db95a9eea68d0d, type: 3}
+  - {fileID: -7723589585542406710, guid: 4a90be45ee57f7f4597e704d39310ed4, type: 3}
+  - {fileID: -7723589585542406710, guid: 1cd89568a22eae949bb0bada3e032d85, type: 3}
+  StartingRoom: {fileID: 988164493}
+  bossex: 0
+  surface: {fileID: 1226935717}
+--- !u!4 &1693212536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693212534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2655888, y: -3.6159992, z: 9.91857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700480284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2053,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3472295771482780781, guid: 1cd89568a22eae949bb0bada3e032d85, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1403559740
+      objectReference: {fileID: 0}
     - target: {fileID: 294509547305188429, guid: 1cd89568a22eae949bb0bada3e032d85, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3170,6 +3174,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1693212535}
+        m_TargetAssemblyTypeName: RoomPlacer, Assembly-CSharp
+        m_MethodName: StartHost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7023045621897410320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3430,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8773049260278848349
 GameObject:
@@ -3449,7 +3465,7 @@ MonoBehaviour:
   MessageBufferSize: 5120
   MaxConnections: 4
   MaxSentMessageQueueSize: 128
-  ConnectAddress: 26.214.134.200
+  ConnectAddress: 26.50.86.120
   ConnectPort: 7777
   ServerListenPort: 7777
   MessageSendMode: 0
@@ -3472,7 +3488,32 @@ MonoBehaviour:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 8773049260278848350}
     PlayerPrefab: {fileID: 7473721206618757222, guid: 582be34049e2a5242b9dfaffad769aaa, type: 3}
-    NetworkPrefabs: []
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 5477873677556477115, guid: 47129e18af352ac4f8d0cfddf58b55c9, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8590341789277081681, guid: 1cd89568a22eae949bb0bada3e032d85, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8590341789277081681, guid: f0fc3764977534d478c820feacf429ff, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8590341789277081681, guid: 4a6434ba7c081df4b9db95a9eea68d0d, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8590341789277081681, guid: 4a90be45ee57f7f4597e704d39310ed4, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 128
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
