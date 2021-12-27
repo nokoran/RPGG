@@ -1,17 +1,23 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
+using Random = UnityEngine.Random;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
+    private CharacterController CharacterController;
     private Transform cam;
     public GameObject bullet;
     public Transform Mouth;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
     private float _userInputHorizontal, _userInputVertical, _userMouseHorizontal, _userMouseVertical;
+    private Vector3 MoveDir, oldDirection = Vector3.zero, oldRotation = Vector3.zero, direction, rotation;
+    private NetworkVariable<Vector3> ServerMoveDirection = new NetworkVariable<Vector3>();
+    private NetworkVariable<Vector3> ServerRotationDirection = new NetworkVariable<Vector3>();
     public static Transform player;
     public static float attackspeed, speed;
     public static int hp;
@@ -134,6 +140,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         player = transform;
+        CharacterController = transform.GetComponent<CharacterController>();
+        if (IsClient && IsOwner)
+        {
+            player.position = new Vector3(Random.Range(-4, 4), 0.5f ,Random.Range(-4, 4));
+        }
         cam = transform.GetChild(2).transform;
         Cursor.lockState = CursorLockMode.Locked;
         attackspeed = Classes[CurrentClass].attackspeed;
@@ -144,22 +155,56 @@ public class Player : MonoBehaviour
         CanvasScript.StatsChanged();
     }
 
-    void Update()
+    private void Update()
+    {
+        if (IsClient && IsOwner)
+        {
+            ClientInput();
+        }
+        ClientMoveAndRotate();
+    }
+
+    
+    void ClientInput()
     {
         _userInputHorizontal = Input.GetAxisRaw("Horizontal");
         _userInputVertical = Input.GetAxisRaw("Vertical");
         _userMouseHorizontal += Input.GetAxis("Mouse X");
-        _userMouseVertical += Input.GetAxis("Mouse Y");
-        transform.localRotation = Quaternion.Euler(0, _userMouseHorizontal * 2f, 0);
-        Vector3 direction = new Vector3(_userInputHorizontal*speed, 0, _userInputVertical*speed);
-        if (direction.magnitude >= 0.1f)
+        rotation = new Vector3(0, _userMouseHorizontal * 2f, 0);
+        direction = new Vector3(_userInputHorizontal * speed, 0, _userInputVertical * speed);
+        if (oldDirection != direction || oldRotation != rotation)
         {
-            float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            
-            Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
-            transform.GetComponent<CharacterController>().Move(MoveDir.normalized * speed * Time.deltaTime);
+            oldDirection = direction;
+            oldRotation = rotation;
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
+                UpdateClientPositionServerRpc(MoveDir);
+            }
+            else
+            {
+                MoveDir = Vector3.zero;
+                UpdateClientPositionServerRpc(MoveDir);
+            }
+            UpdateClientRotationServerRpc(rotation);
+        }
+    }
+
+    void ClientMoveAndRotate()
+    {
+        if (ServerMoveDirection.Value != Vector3.zero)
+        {
+            CharacterController.Move(ServerMoveDirection.Value.normalized * speed * Time.deltaTime);
         }
 
+        if (ServerRotationDirection.Value != Vector3.zero)
+        {
+            transform.localRotation = Quaternion.Euler(ServerRotationDirection.Value);
+        }
+    }
+    
+   /*
         if (Input.GetMouseButton(0) && abilitytofire)
         {
             Attack = true;
@@ -168,6 +213,15 @@ public class Player : MonoBehaviour
             Invoke("FireDelay", attackspeed);
         }
 
+    }*/
+
+    [ServerRpc] void UpdateClientPositionServerRpc(Vector3 newPositionDirection)
+    {
+        ServerMoveDirection.Value = newPositionDirection;
+    }
+    [ServerRpc] void UpdateClientRotationServerRpc(Vector3 newRotationDirection)
+    {
+        ServerRotationDirection.Value = newRotationDirection;
     }
 
     private void AttackEvent()

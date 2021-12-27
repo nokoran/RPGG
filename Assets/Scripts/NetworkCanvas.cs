@@ -20,7 +20,7 @@ public class NetworkCanvas : MonoBehaviour
     {
         me.enabled = false;
         _Canvas.enabled = true;
-        main.enabled = false;
+        main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartServer();
         Debug.Log("Server started...");
         //SceneManager.LoadScene("Main");
@@ -31,7 +31,7 @@ public class NetworkCanvas : MonoBehaviour
         //nm.NetworkConfig.NetworkTransport = new UNetTransport().ConnectAddress;
         me.enabled = false;
         _Canvas.enabled = true;
-        main.enabled = false;
+        main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartClient();
         Debug.Log("Client started...");
         //SceneManager.LoadScene("Main");

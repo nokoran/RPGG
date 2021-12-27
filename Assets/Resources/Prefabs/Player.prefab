@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2341508543885846464}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2341508543885846493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: -1080644715317905095}
   - component: {fileID: 7133318430670747269}
   - component: {fileID: -374708391868584828}
+  - component: {fileID: 7041618352857721524}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -323,7 +324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f3a88ee61c2bd46ab0a5e2bfdba1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cc: {fileID: -1080644715317905095}
   bullet: {fileID: 5477873677556477115, guid: 47129e18af352ac4f8d0cfddf58b55c9, type: 3}
   Mouth: {fileID: 7173803146101793958}
   EnemyLayers:
@@ -345,6 +345,33 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &7041618352857721524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7473721206618757222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
 --- !u!1 &7659203485775443289
 GameObject:
   m_ObjectHideFlags: 0
