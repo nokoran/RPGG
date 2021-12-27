@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Samples;
@@ -140,13 +141,12 @@ public class Player : NetworkBehaviour
     
     private void Start()
     {
-        CameraScript.Follow(transform);
         CharacterController = transform.GetComponent<CharacterController>();
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(-1, 1), 0.5f ,Random.Range(-1, 1));
+            cam = CameraScript.Follow(transform);
         }
-        cam = transform.GetChild(2).transform;
         Cursor.lockState = CursorLockMode.Locked;
         attackspeed = Classes[CurrentClass].attackspeed;
         speed = Classes[CurrentClass].speed;
