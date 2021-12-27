@@ -11,8 +11,10 @@ public class CameraScript : MonoBehaviour
         camtransform = transform;
     }
 
-    public static void Follow(Transform target)
+    public static Transform Follow(Transform target)
     {
         camtransform.SetParent(target, false);
+        Transform cam = camtransform;
+        return cam;
     }
 }
