@@ -19,8 +19,8 @@ public class NetworkCanvas : MonoBehaviour
     public void StartServer()
     {
         me.enabled = false;
-        _Canvas.enabled = true;
-        main.gameObject.SetActive(false);
+        _Canvas.enabled = true; 
+        //main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartServer();
         Debug.Log("Server started...");
         //SceneManager.LoadScene("Main");
@@ -31,7 +31,7 @@ public class NetworkCanvas : MonoBehaviour
         //nm.NetworkConfig.NetworkTransport = new UNetTransport().ConnectAddress;
         me.enabled = false;
         _Canvas.enabled = true;
-        main.gameObject.SetActive(false);
+        //main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartClient();
         Debug.Log("Client started...");
         //SceneManager.LoadScene("Main");
@@ -42,7 +42,7 @@ public class NetworkCanvas : MonoBehaviour
         Player.ChangeClass(kek.options[kek.value].text);
         me.gameObject.SetActive(false);
         _Canvas.gameObject.SetActive(true);
-        main.gameObject.SetActive(false);
+        //main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
         Debug.Log("Host started...");
         //SceneManager.LoadScene("Main");
