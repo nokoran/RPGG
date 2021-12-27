@@ -8,30 +8,44 @@ using UnityEngine.UI;
 
 public class NetworkCanvas : MonoBehaviour
 {
-    public InputField kek;
-
+    public TMP_Dropdown kek;
+    public TMP_InputField kek2;
+    public Canvas _Canvas;
+    public Canvas me;
+    public Camera main;
+    public NetworkManager nm;
     private string selectedClass;
 
     public void StartServer()
     {
+        me.enabled = false;
+        _Canvas.enabled = true;
+        main.enabled = false;
         NetworkManager.Singleton.StartServer();
         Debug.Log("Server started...");
-        SceneManager.LoadScene("Main");
-    }    
+        //SceneManager.LoadScene("Main");
+    }
     public void StartClient()
     {
-        //Player.ChangeClass(selectedClass);
+        Player.ChangeClass(kek.options[kek.value].text);
+        //nm.NetworkConfig.NetworkTransport = new UNetTransport().ConnectAddress;
+        me.enabled = false;
+        _Canvas.enabled = true;
+        main.enabled = false;
         NetworkManager.Singleton.StartClient();
         Debug.Log("Client started...");
-        SceneManager.LoadScene("Main");
+        //SceneManager.LoadScene("Main");
 
     }    
     public void StartHost()
     {
-        Player.ChangeClass(Convert.ToInt32(kek.transform.GetChild(1).GetComponent<Text>().text));
-        Debug.Log("");
+        Player.ChangeClass(kek.options[kek.value].text);
+        me.gameObject.SetActive(false);
+        _Canvas.gameObject.SetActive(true);
+        main.gameObject.SetActive(false);
         NetworkManager.Singleton.StartHost();
         Debug.Log("Host started...");
-        SceneManager.LoadScene("Main");
+        //SceneManager.LoadScene("Main");
     }
+    
 }

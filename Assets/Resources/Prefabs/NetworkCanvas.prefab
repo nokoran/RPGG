@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 934591211658535475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 272817003273895322}
+        m_TargetAssemblyTypeName: NetworkCanvas, Assembly-CSharp
+        m_MethodName: StartHost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2538600226577866019
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +411,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1352812446786679493}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 272817003273895322}
+        m_TargetAssemblyTypeName: NetworkCanvas, Assembly-CSharp
+        m_MethodName: StartServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5022433963435536514
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +923,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kek: {fileID: 8100308490897814086}
+  _Canvas: {fileID: 0}
+  me: {fileID: 0}
+  main: {fileID: 0}
 --- !u!1 &9161937319841729246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,4 +1046,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5261182445425664796}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 272817003273895322}
+        m_TargetAssemblyTypeName: NetworkCanvas, Assembly-CSharp
+        m_MethodName: StartClient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

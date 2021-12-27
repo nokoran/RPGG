@@ -8,7 +8,6 @@ using Cursor = UnityEngine.Cursor;
 public class Player : MonoBehaviour
 {
     private Transform cam;
-    public CharacterController cc;
     public GameObject bullet;
     public Transform Mouth;
     public static List<Item.ItemClass> MyItems = new List<Item.ItemClass>();
@@ -32,9 +31,17 @@ public class Player : MonoBehaviour
         new Class{name = "Warrior", hp = 120, attackspeed = 0.75f, speed = 4f, damage = 15f, range = 1f}
     };
 
-    public static void ChangeClass(int ChosenClass)
+    public static void ChangeClass(string ChosenClass)
     {
-        CurrentClass = ChosenClass;
+        if (ChosenClass == "Mage")
+        {
+            CurrentClass = 0;
+        }
+        else if(ChosenClass == "Warrior")
+        {
+            CurrentClass = 1;
+        }
+
     }
     void FireDelay()
     {
@@ -150,7 +157,7 @@ public class Player : MonoBehaviour
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             
             Vector3 MoveDir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
-            cc.Move(MoveDir.normalized * speed * Time.deltaTime);
+            transform.GetComponent<CharacterController>().Move(MoveDir.normalized * speed * Time.deltaTime);
         }
 
         if (Input.GetMouseButton(0) && abilitytofire)

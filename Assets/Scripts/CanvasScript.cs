@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +18,6 @@ public class CanvasScript : MonoBehaviour
         speed1 = speed;
         range1 = range;
         shotspeed1 = shotspeed;
-        
-        StatsChanged();
     }
 
     public static void StatsChanged()
@@ -41,6 +37,6 @@ public class CanvasScript : MonoBehaviour
         newItem.gameObject.GetComponent<Image>().sprite = ItemImage;
         newItem.transform.localScale = Vector3.one;
         newItem.transform.localRotation = Quaternion.Euler (Vector3.zero);
-        newItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(350f, 230f);
+        newItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(350f, 180f);
     }
 }
