@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Samples;
+using Unity.Netcode.Samples.Samples.Netcode_for_GameObjects._1._0._0_pre._3.ClientNetworkTransform.Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -147,7 +148,7 @@ public class Player : NetworkBehaviour
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(-1, 1), 0.5f ,Random.Range(-1, 1));
-            cam = CameraScript.Follow(transform);
+            cam = CameraController.Follow(transform);
         }
         Cursor.lockState = CursorLockMode.Locked;
         attackspeed = Classes[CurrentClass].attackspeed;

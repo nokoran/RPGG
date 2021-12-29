@@ -1,7 +1,7 @@
 using Unity.Netcode.Components;
 using UnityEngine;
 
-namespace Unity.Netcode.Samples
+namespace Unity.Netcode.Samples.Samples.Netcode_for_GameObjects._1._0._0_pre._3.ClientNetworkTransform.Scripts
 {
     /// <summary>
     /// Used for syncing a transform with client side changes. This includes host. Pure server as owner isn't supported by this. Please use NetworkTransform
