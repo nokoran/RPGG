@@ -32,9 +32,17 @@ public class Player : MonoBehaviour
         new Class{name = "Warrior", hp = 120, attackspeed = 0.75f, speed = 4f, damage = 15f, range = 1f}
     };
 
-    public static void ChangeClass(int ChosenClass)
+    public static void ChangeClass(String ChosenClass)
     {
-        CurrentClass = ChosenClass;
+        if (ChosenClass == "Mage")
+        {
+            CurrentClass = 0;
+        }
+        else if (ChosenClass == "Warrior")
+        {
+            CurrentClass = 1;
+        }
+        
     }
     void FireDelay()
     {

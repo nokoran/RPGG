@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class RoomPlacer : MonoBehaviour
 {
+    public GameObject PlayerPrefab, EnemyPrefab;
     public static GameObject newPlayer, newEnemy;
     public Room[] RoomPrefabs;
     public Room StartingRoom;
@@ -29,9 +30,9 @@ public class RoomPlacer : MonoBehaviour
         PlaceOneRoom(bossex);
         Player.HideRooms((int)StartingRoom.transform.position.x, (int)StartingRoom.transform.position.y);
         yield return new WaitForSeconds(0.1f);
-        newPlayer =  Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
+        newPlayer =  Instantiate(PlayerPrefab);
         newPlayer.transform.position = new Vector3(7.5f, 0.5f, 5.5f);
-        newEnemy = Instantiate(Resources.Load<GameObject>("Prefabs/Enemy"));
+        newEnemy = Instantiate(EnemyPrefab);
         newEnemy.transform.position = new Vector3(0f, 0.5f, 0f);
     }
     private void PlaceOneRoom(bool bossex)
